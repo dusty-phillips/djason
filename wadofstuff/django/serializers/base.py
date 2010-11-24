@@ -59,11 +59,37 @@ class Serializer(base.Serializer):
                     if field.attname not in self.excludes:
                         if not self.fields or field.attname in self.fields:
                             self.handle_m2m_field(obj, field)
+
+            related_fk_objects = obj._meta.get_all_related_objects()
+
+            for ro in related_fk_objects:
+                field_name = ro.get_accessor_name()
+                if field_name not in self.excludes:
+                    self.handle_related_fk_field(obj, field_name)
+
+
+            related_m2m_objects = obj._meta.get_all_related_many_to_many_objects()
+
+            for ro in related_m2m_objects:
+                field_name = ro.get_accessor_name()
+                if field_name not in self.excludes:
+                    self.handle_related_m2m_field(obj, field_name)
+
+
             for extra in self.extras:
                 self.handle_extra_field(obj, extra)
             self.end_object(obj)
         self.end_serialization()
         return self.getvalue()
+
+    def handle_related_m2m_field(self, obj, field_name):
+        """Called to handle 'reverse' m2m serialization."""
+        raise NotImplementedError
+
+    def handle_related_fk_field(self, obj, field_name):
+        """Called to handle 'reverse' fk serialization."""
+        raise NotImplementedError
+
 
     def handle_extra_field(self, obj, extra):
         """Called to handle 'extras' field serialization."""
