@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-import wadofstuff.django.serializers
+import fullserializers.django.serializers
 
 README = open('README').read().strip() + "\n\n"
 ChangeLog = \
@@ -12,8 +12,8 @@ ChangeLog = \
 LONG_DESCRIPTION = README + ChangeLog
 
 setup(
-    name='wadofstuff-django-serializers',
-    version=wadofstuff.django.serializers.__version__,
+    name='django-fullserializers',
+    version=fullserializers.django.serializers.__version__,
     description='Extended serializers for Django.',
     long_description=LONG_DESCRIPTION,
     author='Matthew Flanagan',
@@ -21,9 +21,9 @@ setup(
     url='http://code.google.com/p/wadofstuff/',
     download_url='http://wadofstuff.googlecode.com/files/wadofstuff-django-serializers-1.0.0.tar.gz',
     packages=(
-        'wadofstuff',
-        'wadofstuff.django',
-        'wadofstuff.django.serializers',
+        'fullserializers',
+        'fullserializers.django',
+        'fullserializers.django.serializers',
     ),
     keywords="django json serializer",
     classifiers=(
