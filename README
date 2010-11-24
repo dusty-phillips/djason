@@ -1,3 +1,13 @@
+This is a clone of the wadofstuff serializer from
+https://code.google.com/p/wadofstuff/wiki/DjangoFullSerializers
+
+It has been forked to apply the patch in
+https://code.google.com/p/wadofstuff/issues/detail?id=4
+
+I may extend it if I need additional functionality.
+
+ORIGINAL DOCUMENTATION
+
 Extended Django Serializer Module
 =================================
 
