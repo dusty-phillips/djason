@@ -1,53 +1,14 @@
-This is a clone of the wadofstuff serializer from
+Django JSON Serializer
+
+This is a django serializer that outputs sensible json to be sent to the
+frontend, rather than intended as a serializer to a file.
+
+<insert working example here>
+(Ok, I haven't actually finished the fork yet ;-)
+
+This project was originally forked from but has been changed extensively:
 https://code.google.com/p/wadofstuff/wiki/DjangoFullSerializers
 
-It has been forked to apply the patch in
-https://code.google.com/p/wadofstuff/issues/detail?id=4
-
-I may extend it if I need additional functionality.
-
-ORIGINAL DOCUMENTATION
-
-Extended Django Serializer Module
-=================================
-
-The wadofstuff.django.serializers python module extends Django's built-in
-serializers, adding 3 new capabilities inspired by the Ruby on Rails JSON
-serializer. These parameters allow the developer more control over how their
-models are serialized.
-
-The additional capabilities are:
-
-- excludes - a list of fields to be excluded from serialization. The
-  excludes list takes precedence over the fields argument.
-- extras - a list of non-model field properties or callables to be
-  serialized.
-- relations - a list or dictionary of model related fields to be followed
-  and serialized.
-
-Example of serializing a relation
----------------------------------
-
-    >>> serializers.serialize('json', Group.objects.all(), indent=4, relations=('permissions',))
-    [
-        {
-            "pk": 2,
-            "model": "auth.group",
-            "fields": {
-                "name": "session",
-                "permissions": [
-                    {
-                        "pk": 19,
-                        "model": "auth.permission",
-                        "fields": {
-                            "codename": "add_session",
-                            "name": "Can add session",
-                            "content_type": 7
-                        }
-                    }
-                ]
-            }
-        }
-    ]
-
-
+The original code produced a json format that was good for ./manage.py dump and
+load, but wasn't as suitable for sending data to a web client for processing
+via ajax.
