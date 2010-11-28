@@ -31,7 +31,7 @@ frontend, rather than intended as a serializer to a file. Here's an example:
 
 
 
-This project was originally forked from but has been changed extensively:
+This project was originally forked from:
 https://code.google.com/p/wadofstuff/wiki/DjangoFullSerializers
 
 The original code produced a json format that was good for ./manage.py dump and
