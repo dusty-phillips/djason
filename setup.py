@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-import fullserializers.django.serializers
+import djson
 
 README = open('README').read().strip() + "\n\n"
 ChangeLog = \
@@ -12,18 +12,16 @@ ChangeLog = \
 LONG_DESCRIPTION = README + ChangeLog
 
 setup(
-    name='django-fullserializers',
+    name='djson',
     version=fullserializers.django.serializers.__version__,
-    description='Extended serializers for Django.',
+    description='Convert django models to sensible json format',
     long_description=LONG_DESCRIPTION,
-    author='Matthew Flanagan',
-    author_email='mattimustang@gmail.com',
-    url='http://code.google.com/p/wadofstuff/',
-    download_url='http://wadofstuff.googlecode.com/files/wadofstuff-django-serializers-1.0.0.tar.gz',
+    author='Dusty Phillips',
+    author_email='dusty@archlinux.ca',
+    url='github.com/buchuki/djson',
+    #download_url='',
     packages=(
-        'fullserializers',
-        'fullserializers.django',
-        'fullserializers.django.serializers',
+        'djson',
     ),
     keywords="django json serializer",
     classifiers=(
