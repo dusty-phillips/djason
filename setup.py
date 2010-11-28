@@ -25,7 +25,7 @@ setup(
     ),
     keywords="django json serializer",
     classifiers=(
-        'Development Status :: 5 - Production/Stable',
+        'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
