@@ -1,17 +1,8 @@
-"""
-Full Python serializer for Django.
-"""
 import base
 from django.utils.encoding import smart_unicode, is_protected_type
 from django.core.serializers.python import Deserializer as PythonDeserializer
 from django.db import models
 class Serializer(base.Serializer):
-    """
-    Python serializer for Django modelled after Ruby on Rails.
-    Default behaviour is to serialize only model fields with the exception
-    of ForeignKey and ManyToMany fields which must be explicitly added in the
-    ``relations`` argument.
-    """
 
     def __init__(self, *args, **kwargs):
         """
@@ -47,15 +38,11 @@ class Serializer(base.Serializer):
         """
         Called when serializing of an object ends.
         """
-        self.objects.append({
-            "model"  : smart_unicode(obj._meta),
-            "pk"     : smart_unicode(obj._get_pk_val(), strings_only=True),
-            "fields" : self._fields
-        })
-        if self._extras:
-            self.objects[-1]["extras"] = self._extras
-        self._fields = None
-        self._extras = None
+        dict_object = dict(self._fields)
+        dict_object['model'] = smart_unicode(obj._meta)
+        dict_object['pk'] = smart_unicode(obj._get_pk_val(), strings_only=True)
+        dict_object.update(self._extras)
+        self.objects.append(dict_object)
 
     def handle_field(self, obj, field):
         """
