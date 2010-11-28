@@ -1,10 +1,35 @@
 Django JSON Serializer
 
 This is a django serializer that outputs sensible json to be sent to the
-frontend, rather than intended as a serializer to a file.
+frontend, rather than intended as a serializer to a file. Here's an example:
 
-<insert working example here>
-(Ok, I haven't actually finished the fork yet ;-)
+>>> print s.serialize(User.objects.all(), relations=['groups'], excludes=['user_permissions'], indent=4)
+[
+    {
+        "username": "dusty", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": true, 
+        "is_staff": true, 
+        "last_login": "2010-11-26 13:27:07", 
+        "groups": [
+            {
+                "pk": 1, 
+                "model": "auth.group", 
+                "name": "hello", 
+                "permissions": []
+            }
+        ], 
+        "pk": 1, 
+        "model": "auth.user", 
+        "password": "sha1$8f816$b4c8139100c314b46f1ca931858e4d6d5c61917f", 
+        "email": "dusty@linux.ca", 
+        "date_joined": "2010-11-22 17:55:40"
+    }
+]
+
+
 
 This project was originally forked from but has been changed extensively:
 https://code.google.com/p/wadofstuff/wiki/DjangoFullSerializers
