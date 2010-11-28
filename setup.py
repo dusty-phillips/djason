@@ -13,13 +13,14 @@ LONG_DESCRIPTION = README + ChangeLog
 
 setup(
     name='djson',
-    version=fullserializers.django.serializers.__version__,
+    version=djson.__version__,
     description='Convert django models to sensible json format',
     long_description=LONG_DESCRIPTION,
     author='Dusty Phillips',
     author_email='dusty@archlinux.ca',
-    url='github.com/buchuki/djson',
-    #download_url='',
+    url='https://github.com/buchuki/djson',
+    download_url='https://github.com/buchuki/djson/archives/v%s' % (
+        djson.__version__),
     packages=(
         'djson',
     ),
