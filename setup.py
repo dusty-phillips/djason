@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-import djson
+import djason
 
 README = open('README').read().strip() + "\n\n"
 ChangeLog = \
@@ -12,17 +12,17 @@ ChangeLog = \
 LONG_DESCRIPTION = README + ChangeLog
 
 setup(
-    name='djson',
-    version=djson.__version__,
+    name='djason',
+    version=djason.__version__,
     description='Convert django models to sensible json format',
     long_description=LONG_DESCRIPTION,
     author='Dusty Phillips',
     author_email='dusty@archlinux.ca',
-    url='https://github.com/buchuki/djson',
-    download_url='https://github.com/buchuki/djson/archives/v%s' % (
-        djson.__version__),
+    url='https://github.com/buchuki/djason',
+    download_url='https://github.com/buchuki/djason/archives/v%s' % (
+        djason.__version__),
     packages=(
-        'djson',
+        'djason',
     ),
     keywords="django json serializer",
     classifiers=(
