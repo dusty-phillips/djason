@@ -194,7 +194,10 @@ class Serializer(base.Serializer):
         if hasattr(obj, field):
             extra = getattr(obj, field)
             if callable(extra):
-                self._extras[field] = smart_unicode(extra(), strings_only=True)
+                extra = extra()
+            if isinstance(extra, models.query.QuerySet):
+                serializer = Serializer()
+                self._extras[field] = serializer.serialize(extra)
             else:
                 self._extras[field] = smart_unicode(extra, strings_only=True)
 
