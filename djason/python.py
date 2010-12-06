@@ -197,7 +197,11 @@ class Serializer(base.Serializer):
                 extra = extra()
             if isinstance(extra, models.query.QuerySet):
                 serializer = Serializer()
-                self._extras[field] = serializer.serialize(extra)
+                options = {}
+                if isinstance(self.extras, dict):
+                    if isinstance(self.extras[field], dict):
+                        options = self.extras[field]
+                self._extras[field] = serializer.serialize(extra, **options)
             else:
                 self._extras[field] = smart_unicode(extra, strings_only=True)
 
