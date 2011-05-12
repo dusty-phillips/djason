@@ -1,13 +1,17 @@
 """
-Serialize data to/from JSON
+Serialize data to/from JSON storing the results in an object with
+possible extra attributes.
+
+So where the djason.json serializer would return
+[{attr1: val1},...] this one will return
+{akey: avalue, anotherkey:anothervalue, objects:[{attr1:val1},...]}
 """
 from django.utils import simplejson
-from python import Serializer as PythonSerializer
+from json import Serializer as JsonSerializer
 from django.core.serializers.json import Deserializer as JSONDeserializer, \
     DjangoJSONEncoder
-from django.http import HttpResponse
 
-class Serializer(PythonSerializer):
+class Serializer(JsonSerializer):
     """
     Convert a queryset to JSON.
     """
@@ -20,21 +24,12 @@ class Serializer(PythonSerializer):
         self.options.pop('extras', None)
         self.options.pop('use_natural_keys', None)
         self.use_httpresponse=self.options.pop('httpresponse', None)
-        simplejson.dump(self.objects, self.stream, cls=DjangoJSONEncoder,
+
+        attributes = self.options.pop('attributes', {})
+        list_name = self.options.pop('list_name', 'objects')
+        attributes[list_name] = self.objects
+        simplejson.dump(attributes, self.stream, cls=DjangoJSONEncoder,
             **self.options)
 
-    def getvalue(self):
-        """
-        Return the fully serialized queryset (or None if the output stream
-        is not seekable).
-        """
-
-        if callable(getattr(self.stream, 'getvalue', None)):
-            value = self.stream.getvalue()
-
-        if self.use_httpresponse:
-            return HttpResponse(value)
-        else:
-            return value
 
 Deserializer = JSONDeserializer

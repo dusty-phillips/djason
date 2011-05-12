@@ -1,4 +1,9 @@
-Version 0.0.1
+Version 0.2
+- Added a serializer that allows including the serialized object inside an
+object with extra attributes
+- Added an 'httpresponse' option that will automatically wrap the serialized
+stream in an HttpResponse object
+Version 0.1
 
 - First public released
 - forked from https://code.google.com/p/wadofstuff/wiki/DjangoFullSerializers

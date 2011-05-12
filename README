@@ -29,7 +29,44 @@ frontend, rather than intended as a serializer to a file. Here's an example:
     }
 ]
 
+The default serializer (djason.json) spits out a list of objects as a string.
+You can optionally have it return that list wrapped in an HttpResponse object
+by passing the httpresponse=True option into serialize.
 
+There is a second serializer that takes two optional parameters, attributes (a
+dict) and list_name (a string). This serializer returns a dictionary with any
+key value attributes in the attributes dictionary, and one extra attribute
+named list_name, which contains the list of objects as returned by the json
+serializer. For example:
+
+>>> print s.serialize(User.objects.all(), relations=['groups'], excludes=['user_permissions'], indent=4, attributes={'somekey': 'somevalue'}, list_name="users")
+{
+    "somekey": "somevalue",
+    "users": [
+        {
+            "username": "dusty", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": true, 
+            "is_staff": true, 
+            "last_login": "2010-11-26 13:27:07", 
+            "groups": [
+                {
+                    "pk": 1, 
+                    "model": "auth.group", 
+                    "name": "hello", 
+                    "permissions": []
+                }
+            ], 
+            "pk": 1, 
+            "model": "auth.user", 
+            "password": "sha1$8f816$b4c8139100c314b46f1ca931858e4d6d5c61917f", 
+            "email": "dusty@linux.ca", 
+            "date_joined": "2010-11-22 17:55:40"
+        }
+    ]
+}
 
 This project was originally forked from:
 https://code.google.com/p/wadofstuff/wiki/DjangoFullSerializers
